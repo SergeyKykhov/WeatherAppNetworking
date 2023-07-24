@@ -16,6 +16,7 @@
 		BF4A91692A6EBB2400B4D10D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A91682A6EBB2400B4D10D /* Constants.swift */; };
 		BF4A916B2A6EBBF700B4D10D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A916A2A6EBBF700B4D10D /* NetworkManager.swift */; };
 		BF4A916D2A6EBC2600B4D10D /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A916C2A6EBC2600B4D10D /* WeatherModel.swift */; };
+		BF4A916F2A6EBD8900B4D10D /* ViewInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A916E2A6EBD8900B4D10D /* ViewInterface.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		BF4A91682A6EBB2400B4D10D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BF4A916A2A6EBBF700B4D10D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		BF4A916C2A6EBC2600B4D10D /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		BF4A916E2A6EBD8900B4D10D /* ViewInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewInterface.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 		BF4A91632A6EB72700B4D10D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BF4A916E2A6EBD8900B4D10D /* ViewInterface.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				BF4A914E2A6EA7EC00B4D10D /* AppDelegate.swift in Sources */,
 				BF4A916B2A6EBBF700B4D10D /* NetworkManager.swift in Sources */,
 				BF4A91502A6EA7EC00B4D10D /* SceneDelegate.swift in Sources */,
+				BF4A916F2A6EBD8900B4D10D /* ViewInterface.swift in Sources */,
 				BF4A916D2A6EBC2600B4D10D /* WeatherModel.swift in Sources */,
 				BF4A91692A6EBB2400B4D10D /* Constants.swift in Sources */,
 			);
