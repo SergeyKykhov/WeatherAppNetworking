@@ -11,17 +11,35 @@ import SnapKit
 final class ViewController: UIViewController {
 
     //MARK: - Properties
+
     private let interface = ViewInterface()
-    private let networkManager = NetworkManager()
     var weather: WeatherModel? = nil
 
-    //MARK: - Methods
-    private func requestWeatherData() {
-        networkManager.makeRequst(url: Constants.url, params: Constants.paramCoordinates) { [weak self] (result: WeatherModel?) in
-            guard let self = self, let weather = result else { return }
-            self.updateInterface(with: weather)
-        }
-    }
+    //MARK: - Methods Network URLSession
+
+            private func requestWeatherData() {
+                NetworkManager.shared.makeRequst(url: Constants.url, params: Constants.paramSpb) { [weak self] (result: WeatherModel?) in
+                    guard let self = self, let weather = result else { return }
+                    self.updateInterface(with: weather)
+                }
+            }
+
+    //MARK: - Methods Network Alamofire
+
+//    private func requestWeatherData() {
+//        NetworkManager.shared.fetchData(url: Constants.url, params: Constants.paramSpb) { [weak self] (result: Result<WeatherModel, Error>) in
+//            guard let self = self else { return }
+//
+//            switch result {
+//            case .success(let weather):
+//                self.updateInterface(with: weather)
+//            case .failure(let error):
+//                print("Error: \(error)")
+//            }
+//        }
+//    }
+
+    //MARK: - Formatted
 
     private func formattedTime(from date: Date) -> String {
         let dateFormatter = DateFormatter()
@@ -47,18 +65,21 @@ final class ViewController: UIViewController {
     }
 
     //MARK: - view lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(interface)
         setupLayout()
         requestWeatherData()
+        interface.delegate = self
     }
 
     //MARK: - Constraints
+
     private func setupLayout() {
         interface.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
-} 
+}
 
