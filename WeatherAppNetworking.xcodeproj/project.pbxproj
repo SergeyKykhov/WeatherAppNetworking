@@ -17,6 +17,7 @@
 		BF4A916B2A6EBBF700B4D10D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A916A2A6EBBF700B4D10D /* NetworkManager.swift */; };
 		BF4A916D2A6EBC2600B4D10D /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A916C2A6EBC2600B4D10D /* WeatherModel.swift */; };
 		BF4A916F2A6EBD8900B4D10D /* ViewInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A916E2A6EBD8900B4D10D /* ViewInterface.swift */; };
+		BFE64DA72A7819350096F457 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = BFE64DA62A7819350096F457 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF4A91672A6EB7D900B4D10D /* SnapKit in Frameworks */,
+				BFE64DA72A7819350096F457 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +130,7 @@
 			name = WeatherAppNetworking;
 			packageProductDependencies = (
 				BF4A91662A6EB7D900B4D10D /* SnapKit */,
+				BFE64DA62A7819350096F457 /* Alamofire */,
 			);
 			productName = WeatherAppNetworking;
 			productReference = BF4A914A2A6EA7EC00B4D10D /* WeatherAppNetworking.app */;
@@ -159,6 +162,7 @@
 			mainGroup = BF4A91412A6EA7EC00B4D10D;
 			packageReferences = (
 				BF4A91652A6EB7D800B4D10D /* XCRemoteSwiftPackageReference "SnapKit" */,
+				BFE64DA52A7819350096F457 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = BF4A914B2A6EA7EC00B4D10D /* Products */;
 			projectDirPath = "";
@@ -410,6 +414,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		BFE64DA52A7819350096F457 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -417,6 +429,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BF4A91652A6EB7D800B4D10D /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		BFE64DA62A7819350096F457 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFE64DA52A7819350096F457 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -7,8 +7,13 @@
 
 import Foundation
 import UIKit
+import Alamofire
 
 final class NetworkManager {
+
+    static let shared = NetworkManager()
+
+    //MARK: - Methods URLSession
 
     func makeRequst(url: String, params: String, complition: @escaping (WeatherModel) -> Void) {
         guard let completeUrl = URL(string: url + params) else {
@@ -38,4 +43,32 @@ final class NetworkManager {
         }
         task.resume()
     }
+
+    //MARK: - Methods Alamofire
+
+//    func fetchData(url: String, params: String, completion: @escaping (Result<WeatherModel, Error>) -> Void) {
+//
+//        guard let completeUrl = URL(string: url + params) else {
+//            completion(.failure(NSError(domain: "InvalidURL", code: 0, userInfo: nil)))
+//            return
+//        }
+//
+//        AF.request(completeUrl).validate().response { response in
+//            guard let data = response.data else {
+//                if let error = response.error {
+//                    completion(.failure(error))
+//                } else {
+//                    completion(.failure(NSError(domain: "InvalidData", code: 0, userInfo: nil)))
+//                }
+//                return
+//            }
+//
+//            do {
+//                let json = try JSONDecoder().decode(WeatherModel.self, from: data)
+//                completion(.success(json))
+//            } catch {
+//                completion(.failure(error))
+//            }
+//        }
+//    }
 }
