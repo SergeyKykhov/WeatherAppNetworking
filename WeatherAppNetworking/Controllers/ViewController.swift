@@ -17,27 +17,27 @@ final class ViewController: UIViewController {
 
     //MARK: - Methods Network URLSession
 
-            private func requestWeatherData() {
-                NetworkManager.shared.makeRequst(url: Constants.url, params: Constants.paramSpb) { [weak self] (result: WeatherModel?) in
-                    guard let self = self, let weather = result else { return }
-                    self.updateInterface(with: weather)
-                }
-            }
+    private func requestWeatherData() {
+        NetworkManager.shared.makeRequst(url: Constants.url, params: Constants.paramSpb) { [weak self] (result: WeatherModel?) in
+            guard let self = self, let weather = result else { return }
+            self.updateInterface(with: weather)
+        }
+    }
 
     //MARK: - Methods Network Alamofire
 
-//    private func requestWeatherData() {
-//        NetworkManager.shared.fetchData(url: Constants.url, params: Constants.paramSpb) { [weak self] (result: Result<WeatherModel, Error>) in
-//            guard let self = self else { return }
-//
-//            switch result {
-//            case .success(let weather):
-//                self.updateInterface(with: weather)
-//            case .failure(let error):
-//                print("Error: \(error)")
-//            }
-//        }
-//    }
+    //    private func requestWeatherData() {
+    //        NetworkManager.shared.fetchData(url: Constants.url, params: Constants.paramSpb) { [weak self] (result: Result<WeatherModel, Error>) in
+    //            guard let self = self else { return }
+    //
+    //            switch result {
+    //            case .success(let weather):
+    //                self.updateInterface(with: weather)
+    //            case .failure(let error):
+    //                print("Error: \(error)")
+    //            }
+    //        }
+    //    }
 
     //MARK: - Formatted
 
@@ -75,11 +75,51 @@ final class ViewController: UIViewController {
     }
 
     //MARK: - Constraints
-
+    
     private func setupLayout() {
         interface.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
+}
+
+//MARK: - Extension ViewController. Delegate
+
+extension ViewController: ViewInterfaceDelegate {
+
+    func didTapMoscowButton(completion: @escaping (String, String) -> Void) {
+        let cityName = "Moscow"
+        let params = Constants.paramMoscow
+        completion(cityName, params)
+    }
+
+    func didTapStPetersburgButton(completion: @escaping (String, String) -> Void) {
+        let cityName = "St. Petersburg"
+        let params = Constants.paramSpb
+        completion(cityName, params)
+    }
+
+    //MARK: - Methods Network in Delegate
+
+    func requestWeatherData(for city: String, with params: String) {
+        NetworkManager.shared.makeRequst(url: Constants.url, params: params) { [weak self] (result: WeatherModel?) in
+            guard let self = self, let weather = result else { return }
+            self.updateInterface(with: weather)
+        }
+    }
+
+    //MARK: - Methods Network Alamofire in Delegate
+
+    //    func requestWeatherData(for city: String, with params: String) {
+    //        NetworkManager.shared.fetchData(url: Constants.url, params: params) { [weak self] (result: Result<WeatherModel, Error>) in
+    //            guard let self = self else { return }
+    //            switch result {
+    //            case .success(let weather):
+    //                self.updateInterface(with: weather)
+    //            case .failure(let error):
+    //                print("Error: \(error)")
+    //            }
+    //        }
+    //    }
 }
 
