@@ -9,8 +9,8 @@
 
 ## Screenshots
 
-<img src="https://github.com/SergeyKykhov/WeatherAppNetworking/tree/develop/Screenshots/1.png" width="214" height="433"> 
-<img src="https://github.com/SergeyKykhov/WeatherAppNetworking/tree/develop/Screenshots/2.png" width="214" height="433"> 
+<img src="https://github.com/SergeyKykhov/WeatherAppNetworking/blob/develop/Screenshots/1.png" width="214" height="433"> <img src="https://github.com/SergeyKykhov/WeatherAppNetworking/blob/develop/Screenshots/2.png" width="214" height="433"> 
+
 
 ## Setup
 - [x] For some regions, the endless tape will not work. Use a VPN
