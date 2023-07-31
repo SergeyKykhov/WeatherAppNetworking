@@ -9,7 +9,17 @@ import Foundation
 import UIKit
 import SnapKit
 
+protocol ViewInterfaceDelegate: class {
+    func didTapMoscowButton(completion: @escaping (String, String) -> Void)
+    func didTapStPetersburgButton(completion: @escaping (String, String) -> Void)
+    func requestWeatherData(for city: String, with params: String)
+}
+
 final class ViewInterface: UIView {
+
+    weak var delegate: ViewInterfaceDelegate?
+
+    // MARK: - Background effects
 
     let background: UIImageView = {
         let image = UIImage(named: "WeatherAppjpg")
@@ -19,7 +29,20 @@ final class ViewInterface: UIView {
         return view
     }()
 
+    private func animateBackgroundBrightness() {
+            UIView.animate(withDuration: 2, animations: {
+                self.background.alpha = 1.0
+            }) { _ in
+                UIView.animate(withDuration: 2, animations: {
+                    self.background.alpha = 0.6
+                }) { _ in
+                    self.animateBackgroundBrightness()
+                }
+            }
+        }
+
     // MARK: - Labels
+
     let temperatureLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -33,7 +56,7 @@ final class ViewInterface: UIView {
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 40)
         label.textColor = .white
-        label.text = "Saint-Petersburg"
+        label.text = "St. Petersburg"
         return label
     }()
 
@@ -78,6 +101,7 @@ final class ViewInterface: UIView {
     }()
 
     // MARK: - Icons
+
     let humidity: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -167,7 +191,62 @@ final class ViewInterface: UIView {
         return stackView
     }()
 
+    //MARK: - Buttons
+
+    let moscowButton: UIButton = {
+        let moscowButton = UIButton()
+        moscowButton.setTitle("Moscow", for: .normal)
+        moscowButton.addTarget(self, action: #selector(moscowButtonTapped), for: .touchUpInside)
+        moscowButton.backgroundColor = UIColor.gray.withAlphaComponent(0.4)
+        moscowButton.layer.cornerRadius = 10
+        moscowButton.setTitleColor(.white, for: .normal)
+        return moscowButton
+    }()
+
+    @objc private func moscowButtonTapped() {
+        delegate?.didTapMoscowButton(completion: { cityName, params in
+            self.delegate?.requestWeatherData(for: cityName, with: params)
+            self.city.text = cityName
+
+            UIView.animate(withDuration: 0.3) {
+                        self.moscowButton.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.8)
+                    }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        UIView.animate(withDuration: 0.3) {
+                            self.moscowButton.backgroundColor = UIColor.gray.withAlphaComponent(0.4)
+                        }
+                    }
+        })
+    }
+
+    let spbButton: UIButton = {
+        let spbButton = UIButton()
+        spbButton.setTitle("St. Petersburg", for: .normal)
+        spbButton.addTarget(self, action: #selector(spbButtonTapped), for: .touchUpInside)
+        spbButton.backgroundColor = UIColor.gray.withAlphaComponent(0.4)
+        spbButton.layer.cornerRadius = 10
+        spbButton.setTitleColor(.white, for: .normal)
+        return spbButton
+    }()
+
+    @objc private func spbButtonTapped() {
+        delegate?.didTapStPetersburgButton(completion: { cityName, params in
+            self.delegate?.requestWeatherData(for: cityName, with: params)
+            self.city.text = cityName
+
+            UIView.animate(withDuration: 0.3) {
+                        self.spbButton.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.8)
+                    }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        UIView.animate(withDuration: 0.3) {
+                            self.spbButton.backgroundColor = UIColor.gray.withAlphaComponent(0.4)
+                        }
+                    }
+        })
+    }
+
     //MARK: - Initializers
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -179,7 +258,9 @@ final class ViewInterface: UIView {
     }
 
     //MARK: - UI Setup
+
     private func setupUI() {
+        animateBackgroundBrightness()
         addSubview(background)
         addSubview(temperatureLabel)
         addSubview(city)
@@ -193,10 +274,13 @@ final class ViewInterface: UIView {
         addSubview(sunsetTime)
         addSubview(sunriseTimeLabel)
         addSubview(sunsetTimeLabel)
+        addSubview(moscowButton)
+        addSubview(spbButton)
         createLayout()
     }
 
     //MARK: - Constraints
+
     func createLayout() {
 
         background.snp.makeConstraints {make in
@@ -264,6 +348,19 @@ final class ViewInterface: UIView {
             make.top.equalTo(sunsetTime.snp.bottom).offset(5)
             make.right.equalToSuperview().offset(-40)
         }
+
+        moscowButton.snp.makeConstraints { make in
+            make.top.equalTo(city.snp.bottom).offset(10)
+            make.left.equalToSuperview().offset(30)
+            make.width.equalTo(100)
+            make.height.equalTo(25)
+        }
+
+        spbButton.snp.makeConstraints { make in
+            make.top.equalTo(city.snp.bottom).offset(10)
+            make.right.equalToSuperview().offset(-30)
+            make.width.equalTo(150)
+            make.height.equalTo(25)
+        }
     }
 }
-
